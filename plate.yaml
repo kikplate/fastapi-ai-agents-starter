@@ -1,0 +1,32 @@
+name: fastapi-ai-agents-starter
+owner: kikplate-public
+description: Minimal FastAPI AI agents starter template with Python gitignore and base docs.
+version: 1.0.0
+
+category: backend
+
+tags:
+  - fastapi
+  - ai
+  - agents
+  - python
+  - starter
+  - boilerplate
+
+schema:
+  projectName:
+    type: string
+    default: fastapi-ai-agents-starter
+  projectDescription:
+    type: string
+    default: Capitalizes on the massive AI trend while staying practical.
+
+modules: {}
+
+files:
+  - path: .gitignore
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/.gitignore.tmpl
+  - path: LICENSE
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/LICENSE.tmpl
+  - path: README.md
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/README.md.tmpl
