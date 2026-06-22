@@ -1,0 +1,34 @@
+from dataclasses import dataclass
+
+from fastapi import APIRouter
+from pydantic import BaseModel, Field
+
+router = APIRouter(tags=["agents"])
+
+
+class PromptRequest(BaseModel):
+    message: str = Field(min_length=1)
+
+
+class AgentResponse(BaseModel):
+    agent_name: str
+    prompt: str
+    answer: str
+
+
+@dataclass
+class ExampleAgent:
+    name: str = "{{ .agentName }}"
+    system_prompt: str = "{{ .agentPrompt }}"
+
+    async def run(self, message: str) -> str:
+        return f"{self.system_prompt} Received: {message}"
+
+
+example_agent = ExampleAgent()
+
+
+@router.post("/agents/example", response_model=AgentResponse)
+async def run_example_agent(payload: PromptRequest) -> AgentResponse:
+    answer = await example_agent.run(payload.message)
+    return AgentResponse(agent_name=example_agent.name, prompt=payload.message, answer=answer)

@@ -1,0 +1,15 @@
+FROM python:{{ .pythonVersion }}-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir .
+
+COPY . .
+
+EXPOSE {{ .appPort }}
+
+CMD ["uvicorn", "{{ .packageName }}.main:app", "--host", "0.0.0.0", "--port", "{{ .appPort }}", "--app-dir", "app"]

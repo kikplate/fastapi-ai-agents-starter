@@ -1,2 +1,41 @@
 # {{ .projectName }}
+
+[![View on KikPlate](https://img.shields.io/static/v1?label=KikPlate&message={{ .kikplateSlug }}&color={{ .kikplateBadgeColor }}&style=flat-square)](https://kikplate.dev/plates/{{ .kikplateSlug }})
+
 {{ .projectDescription }}
+
+## Template Overview
+
+This repository is a Kikplate template for generating a minimal FastAPI AI agents starter.
+
+The template is defined by plate.yaml and the files inside templates with tmpl extensions. You can customize the project name project description copyright year and copyright holder through the schema in plate.yaml.
+
+The tests module is optional and is controlled by modules.tests.enabled.
+
+## Build locally from this template
+
+Run this command from the repository root.
+
+```bash
+kik generate --template . --output-dir ./generated-project
+```
+
+This generates a project in generated-project using the local template files.
+
+## Generate from Kikplate server
+
+Run this command when using the published template name.
+
+```bash
+kik generate {{ .kikplateSlug }}
+```
+
+This generates the same project shape using the remote template registry source.
+
+## How to use the generated project
+
+Open the generated project and add your FastAPI application for the AI agents workflow you want to build.
+
+```bash
+cd generated-project
+```
