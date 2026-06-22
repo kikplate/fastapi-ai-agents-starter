@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    container_name: {{ .projectName | slugify }}
+    env_file:
+      - .env.example
+    ports:
+      - "{{ .appPort }}:{{ .appPort }}"
+    restart: unless-stopped

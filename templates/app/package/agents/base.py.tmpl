@@ -1,0 +1,8 @@
+from typing import Protocol
+
+
+class Agent(Protocol):
+    name: str
+
+    async def run(self, message: str) -> str:
+        ...

@@ -18,16 +18,92 @@ schema:
   projectName:
     type: string
     default: fastapi-ai-agents-starter
+  packageName:
+    type: string
+    default: fastapi_ai_agents_starter
   projectDescription:
     type: string
     default: Capitalizes on the massive AI trend while staying practical.
+  kikplateSlug:
+    type: string
+    default: fastapi-ai-agents-starter
+  kikplateBadgeColor:
+    type: string
+    default: 0366d6
+  pythonVersion:
+    type: string
+    default: "3.12"
+  appPort:
+    type: int
+    default: 8000
+  apiPrefix:
+    type: string
+    default: /api/v1
+  environment:
+    type: string
+    default: development
+  agentName:
+    type: string
+    default: assistant
+  agentPrompt:
+    type: string
+    default: Helpful AI assistant that answers clearly and concisely.
+  copyrightYear:
+    type: int
+    default: 2026
+  copyrightHolder:
+    type: string
+    default: kikplate-public
 
-modules: {}
+modules:
+  docker:
+    enabled: true
+  exampleAgent:
+    enabled: true
+  tests:
+    enabled: true
 
 files:
   - path: .gitignore
     template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/.gitignore.tmpl
+  - path: .env.example
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/.env.example.tmpl
   - path: LICENSE
     template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/LICENSE.tmpl
+  - path: Dockerfile
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/Dockerfile.tmpl
+    condition: modules.docker.enabled
+  - path: docker-compose.yml
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/docker-compose.yml.tmpl
+    condition: modules.docker.enabled
+  - path: pyproject.toml
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/pyproject.toml.tmpl
+  - path: app/{{ .packageName }}/__init__.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/__init__.py.tmpl
+  - path: app/{{ .packageName }}/main.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/main.py.tmpl
+  - path: app/{{ .packageName }}/api/__init__.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/api/__init__.py.tmpl
+  - path: app/{{ .packageName }}/api/routes/__init__.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/api/routes/__init__.py.tmpl
+  - path: app/{{ .packageName }}/api/routes/health.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/api/routes/health.py.tmpl
+  - path: app/{{ .packageName }}/core/__init__.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/core/__init__.py.tmpl
+  - path: app/{{ .packageName }}/core/config.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/core/config.py.tmpl
+  - path: app/{{ .packageName }}/agents/__init__.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/agents/__init__.py.tmpl
+  - path: app/{{ .packageName }}/agents/base.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/agents/base.py.tmpl
+  - path: app/{{ .packageName }}/agents/example_agent.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/app/package/agents/example_agent.py.tmpl
+    condition: modules.exampleAgent.enabled
+  - path: tests/__init__.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/tests/__init__.py.tmpl
+    condition: modules.tests.enabled
+  - path: tests/test_health.py
+    template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/tests/test_health.py.tmpl
+    condition: modules.tests.enabled
   - path: README.md
     template: https://raw.githubusercontent.com/kikplate/fastapi-ai-agents-starter/main/templates/README.md.tmpl
